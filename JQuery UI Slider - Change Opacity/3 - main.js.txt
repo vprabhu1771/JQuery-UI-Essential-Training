@@ -1,0 +1,11 @@
+$(document).ready(function() {
+
+    $("#slider").slider({
+        value: 100,
+        slide: function (event, ui) {
+            let val = ui.value / 100;
+            $("#target").css("opacity", val);
+        }
+    });
+
+});

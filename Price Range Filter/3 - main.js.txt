@@ -1,0 +1,45 @@
+var products = {
+    "HP Pendrive": 100,
+    "EPSON 003 Black INK": 400,
+    "Sony Memory Card 64GB": 500,
+    "Logitech Webcam": 250,
+    "Sony Headset": 1500,
+    "EPSON Ink Tank L3210 Printer": 13500
+};
+
+$(document).ready(function() {
+
+    
+
+    $("#slider").slider({
+        max: 15000,
+        range:true,
+        values:[10, 2000],
+        change: function(event, ui){
+            getDetails(ui.values[0], ui.values[1]);
+        }
+    });
+
+    var current = $("#slider").slider("option", "values");
+
+    getDetails(current[0], current[1]);
+
+});
+
+function getDetails(minimum, maximum) 
+{
+    $("#range").text("$" + minimum + " - $" + maximum);
+
+    var result = "<table><tr><th>Product Name</th><th>Price (in $)</th></tr>";
+
+    for(var item in products)
+    {
+        if(products[item] >= minimum && products[item] <= maximum)
+        {
+            result += "<tr><td>" + item + "</td><td>" + products[item] + "</td></tr>";
+        }
+    }
+    result += "</table>";
+
+    $("#output").html(result);
+}
